@@ -1,20 +1,28 @@
+import { dashboard, expenses, transactions, trend } from './icons'
+
 export const menuItems = [
   {
     id: 1,
     title: 'Dashboard',
-    icon: '',
+    icon: dashboard,
     link: '/dashboard',
   },
   {
     id: 2,
     title: 'View Transactions',
-    icon: '',
+    icon: transactions,
     link: '/dashboard',
   },
   {
     id: 3,
     title: 'Incomes',
-    icon: '',
+    icon: trend,
+    link: '/Dashboard',
+  },
+  {
+    id: 3,
+    title: 'Outcomes',
+    icon: expenses,
     link: '/Dashboard',
   },
 ]
