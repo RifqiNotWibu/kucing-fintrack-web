@@ -1,8 +1,15 @@
 import React from 'react'
 import styled from 'styled-components'
+import { InnerLayout } from '../../styles/Layouts'
 
 function Income() {
-  return <IncomeStyled>Income</IncomeStyled>
+  return (
+    <IncomeStyled>
+      <InnerLayout>
+        <h1>Income</h1>
+      </InnerLayout>
+    </IncomeStyled>
+  )
 }
 
 const IncomeStyled = styled.div``
