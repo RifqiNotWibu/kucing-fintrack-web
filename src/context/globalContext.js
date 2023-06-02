@@ -1,7 +1,7 @@
-import React, { useContext, useState } from 'react'
-import axios from 'axios'
+import React, { useContext, useState } from "react"
+import axios from "axios"
 
-const BASE_URL = 'http://localhost:3000/'
+const BASE_URL = "http://localhost:3000/"
 
 const GlobalContext = React.createContext()
 
@@ -26,8 +26,17 @@ export const GlobalProvider = ({ children }) => {
     console.log(response.data)
   }
 
+  const deleteIncome = async (id) => {
+    const response = await axios.delete(`${BASE_URL}deleteIncome/${id}`, {
+      data: { userId: userId },
+    })
+    getIncomes()
+  }
+
   return (
-    <GlobalContext.Provider value={{ addIncome, getIncomes, incomes }}>
+    <GlobalContext.Provider
+      value={{ addIncome, getIncomes, deleteIncome, incomes }}
+    >
       {children}
     </GlobalContext.Provider>
   )
