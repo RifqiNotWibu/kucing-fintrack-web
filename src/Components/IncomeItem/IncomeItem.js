@@ -36,6 +36,7 @@ function IncomeItem({
   type,
 }) {
   console.log("type", type)
+
   const categoryIcon = () => {
     switch (category) {
       case "salary":
