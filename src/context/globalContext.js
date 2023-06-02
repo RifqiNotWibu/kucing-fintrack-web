@@ -17,6 +17,7 @@ export const GlobalProvider = ({ children }) => {
       .catch((err) => {
         setError(err.response.data.message)
       })
+    getIncomes()
   }
 
   const userId = 1 //userId
