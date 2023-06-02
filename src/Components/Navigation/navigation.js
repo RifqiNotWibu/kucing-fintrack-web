@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import avatar from '../../img/avatar.png'
-import { menuItems } from '../../utils/menuItems'
 import { signout } from '../../utils/Icons'
+import { menuItems } from '../../utils/menuItems'
 
 function Navigation({ active, setActive }) {
   return (
@@ -14,7 +14,6 @@ function Navigation({ active, setActive }) {
           <p>Your Money</p>
         </div>
       </div>
-
       <ul className='menu-items'>
         {menuItems.map((item) => {
           return (
