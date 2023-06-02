@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import DatePicker from 'react-datepicker'
+import Button from '../Button/Button'
 
 function Form() {
   //   const { addIncome, getIncomes, error, setError } = useGlobalContext()
@@ -68,6 +69,27 @@ function Form() {
           <option value='youtube'>Youtube</option>
           <option value='other'>Other</option>
         </select>
+      </div>
+      <div className='input-control'>
+        <textarea
+          name='description'
+          value={description}
+          placeholder='Add A Reference'
+          id='description'
+          cols='30'
+          rows='4'
+          onChange={handleInput('description')}
+        ></textarea>
+      </div>
+      <div className='submit-btn'>
+        <Button
+          name={'Add Income'}
+          icon={plus}
+          bPad={'.8rem 1.6rem'}
+          bRad={'30px'}
+          bg={'var(--color-accent'}
+          color={'#fff'}
+        />
       </div>
     </FormStyled>
   )
