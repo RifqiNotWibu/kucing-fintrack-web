@@ -129,6 +129,11 @@ const FormStyled = styled.form`
       color: rgba(34, 34, 96, 0.4);
     }
   }
+  .input-control {
+    input {
+      width: 100%;
+    }
+  }
 `
 
 export default Form
