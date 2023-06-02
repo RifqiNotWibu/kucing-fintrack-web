@@ -1,11 +1,18 @@
-import React from 'react'
-import styled from 'styled-components'
-import { InnerLayout } from '../../styles/Layouts'
-import { useGlobalContext } from '../../context/globalContext'
-import Form from '../Form/Form'
+import React from "react"
+import styled from "styled-components"
+import { InnerLayout } from "../../styles/Layouts"
+import { useGlobalContext } from "../../context/globalContext"
+import Form from "../Form/Form"
+import { useEffect } from "react"
+import IncomeItem from "../IncomeItem/IncomeItem"
 
 function Income() {
-  const { addIncome, incomes, getIncomes } = useGlobalContext()
+  const { addIncome, incomes, getIncomes, deleteIncome } = useGlobalContext()
+
+  useEffect(() => {
+    getIncomes()
+  }, [])
+
   return (
     <IncomeStyled>
       <InnerLayout>
@@ -14,7 +21,25 @@ function Income() {
           <div className='form-container'>
             <Form />
           </div>
-          <div className='incomes'></div>
+          <div className='incomes'>
+            {incomes.map((income) => {
+              const { id, title, amount, date, category, description, type } =
+                income
+              return (
+                <IncomeItem
+                  key={id}
+                  id={id}
+                  title={title}
+                  description={description}
+                  amount={amount}
+                  date={date}
+                  type={type}
+                  category={category}
+                  deleteItem={deleteIncome}
+                />
+              )
+            })}
+          </div>
         </div>
       </InnerLayout>
     </IncomeStyled>
