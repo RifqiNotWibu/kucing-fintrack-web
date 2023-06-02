@@ -18,8 +18,8 @@ function Orb() {
     `
 
   const OrbStyled = styled.div`
-    width: 70vh;
-    height: 70vh;
+    width: 120vh;
+    height: 120vh;
     position: absolute;
     border-radius: 50%;
     margin-left: -37vh;
