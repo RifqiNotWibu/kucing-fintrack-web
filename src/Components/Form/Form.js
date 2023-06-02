@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
+import DatePicker from 'react-datepicker'
 
 function Form() {
   //   const { addIncome, getIncomes, error, setError } = useGlobalContext()
@@ -34,6 +35,17 @@ function Form() {
           name={'amount'}
           placeholder={'Salary Amount'}
           onChange={handleInput('amount')}
+        />
+      </div>
+      <div className='input-control'>
+        <DatePicker
+          id='date'
+          placeholderText='Enter A Date'
+          selected={date}
+          dateFormat='dd/MM/yyyy'
+          onChange={(date) => {
+            setInputState({ ...inputState, date: date })
+          }}
         />
       </div>
     </FormStyled>
