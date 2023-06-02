@@ -3,14 +3,18 @@ import styled from 'styled-components'
 import { MainLayout } from './styles/Layouts'
 import bg from './img/bg.png'
 
-import Orb from './Components/Orb/Orb.js'
+import Orb from './Components/Orb/orb.js'
 import Navigation from './Components/Navigation/Navigation.js'
 import Dashboard from './Components/Dashboard/Dashboard'
 import Income from './Components/Income/Income'
-import Expenses from './Components/Expenses/Expenses'
+import Expense from './Components/Expense/Expense'
+import { useGlobalContext } from './context/globalContext'
 
 function App() {
   const [active, setActive] = useState(1)
+
+  const global = useGlobalContext()
+  console.log(global)
 
   const displayData = () => {
     switch (active) {
@@ -21,7 +25,7 @@ function App() {
       case 3:
         return <Income />
       case 4:
-        return <Expenses />
+        return <Expense />
       default:
         return <Dashboard />
     }
