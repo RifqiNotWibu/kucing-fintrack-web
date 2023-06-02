@@ -3,6 +3,8 @@ import styled from 'styled-components'
 import DatePicker from 'react-datepicker'
 import Button from '../Button/Button'
 
+import { plus } from '../../utils/Icons'
+
 function Form() {
   //   const { addIncome, getIncomes, error, setError } = useGlobalContext()
   const [inputState, setInputState] = useState({
