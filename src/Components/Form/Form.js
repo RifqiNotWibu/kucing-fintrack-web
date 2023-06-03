@@ -22,7 +22,7 @@ function Form() {
   const handleInput = (name) => (e) => {
     const value = name === 'amount' ? parseInt(e.target.value) : e.target.value
     setInputState({ ...inputState, [name]: value, userId: 1 })
-    // setError('')
+    setError('')
   }
 
   const handleSubmit = (e) => {
@@ -39,6 +39,7 @@ function Form() {
 
   return (
     <FormStyled onSubmit={handleSubmit}>
+      {error && <p className='error'>{error}</p>}
       <div className='input-control'>
         <input
           type='text'
