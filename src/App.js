@@ -8,6 +8,7 @@ import Navigation from './Components/Navigation/Navigation.js'
 import Dashboard from './Components/Dashboard/Dashboard'
 import Income from './Components/Income/Income'
 import Expense from './Components/Expense/Expense'
+import { Login } from './Components/Login/Login'
 import { useGlobalContext } from './context/globalContext'
 
 function App() {
@@ -38,8 +39,8 @@ function App() {
   return (
     <AppStyled bg={bg} className='App'>
       {orbMemo}
-      <Orb />
       <MainLayout>
+        {/* <Login /> */}
         <Navigation active={active} setActive={setActive} />
         <main>{displayData()}</main>
       </MainLayout>
