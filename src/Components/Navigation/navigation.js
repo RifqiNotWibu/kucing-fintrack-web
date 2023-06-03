@@ -76,6 +76,7 @@ const NavStyled = styled.nav`
     flex-direction: column;
     li {
       display: grid;
+      -ms-layout-grid-line: none;
       grid-template-columns: 40px auto;
       align-items: center;
       margin: 0.6rem 0;
