@@ -80,9 +80,6 @@ function ExpenseForm() {
           <option value='' disabled>
             Select Option
           </option>
-          <option value='' disabled>
-            Select Option
-          </option>
           {/* 3:36 */}
           <option value='education'>Education</option>
           <option value='groceries'>Groceries</option>

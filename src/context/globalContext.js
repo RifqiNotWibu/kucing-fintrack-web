@@ -17,8 +17,8 @@ export const GlobalProvider = ({ children }) => {
       .post(`${BASE_URL}login`, login)
       .catch((err) => {
         setError(err.response.data.message)
+        console.log(err.response.data.message)
       })
-    console.log(response.data)
   }
 
   //INCOMES
