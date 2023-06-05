@@ -9,6 +9,17 @@ export const GlobalProvider = ({ children }) => {
   const [incomes, setIncomes] = useState([])
   const [expenses, setExpenses] = useState([])
   const [error, setError] = useState(null)
+  const [loginData] = useState([])
+
+  // USER
+  const login = async (login) => {
+    const response = await axios
+      .post(`${BASE_URL}login`, login)
+      .catch((err) => {
+        setError(err.response.data.message)
+      })
+    console.log(response.data)
+  }
 
   //INCOMES
   const addIncome = async (income) => {
@@ -101,6 +112,8 @@ export const GlobalProvider = ({ children }) => {
         deleteExpense,
         totalExpense,
         expenses,
+        login,
+        loginData,
         totalBalance,
         transactionHistory,
         error,
