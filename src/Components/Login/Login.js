@@ -1,11 +1,34 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import Button from '../Button/Button'
-import { login } from '../../utils/Icons'
+import { loginBtn } from '../../utils/Icons'
+import { useGlobalContext } from '../../context/globalContext'
 
-export const Login = () => {
+function Login() {
+  const { login, error, setError } = useGlobalContext()
+  const [inputState, setInputState] = useState({
+    email: '',
+    pass: '',
+  })
+
+  const { email, pass } = inputState
+
+  const handleInput = (name) => (e) => {
+    setInputState({ ...inputState, [name]: e.target.value })
+    setError('')
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    login(inputState)
+    setInputState({
+      email: '',
+      pass: '',
+    })
+  }
+
   return (
-    <LoginStyled>
+    <LoginStyled onSubmit={handleSubmit}>
       <div className='title'>
         <h2>Welcome!</h2>
         <h5>Please login to continue ^_^</h5>
@@ -13,26 +36,26 @@ export const Login = () => {
       <div className='input-control'>
         <input
           type='text'
-          //   value={title}
+          value={email}
           name={'email'}
           placeholder='email'
-          //   onChange={handleInput('title')}
+          onChange={handleInput('email')}
         />
       </div>
       <div className='input-control'>
         <input
-          //   value={amount}
+          value={pass}
           type='text'
           name={'password'}
           placeholder={'password'}
-          //   onChange={handleInput('amount')}
+          onChange={handleInput('pass')}
         />
       </div>
       <div className='btn-container'>
         <div className='submit-btn'>
           <Button
             name={'Login'}
-            icon={login}
+            icon={loginBtn}
             bPad={'.8rem 1.6rem'}
             bRad={'30px'}
             bg={'var(--color-accent'}
