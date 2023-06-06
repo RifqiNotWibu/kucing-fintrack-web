@@ -4,34 +4,13 @@ import { MainLayout } from './styles/Layouts'
 import bg from './img/bg.png'
 
 import Orb from './Components/Orb/orb.js'
-import Navigation from './Components/Navigation/Navigation.js'
-import Dashboard from './Components/Dashboard/Dashboard'
-import Income from './Components/Income/Income'
-import Expense from './Components/Expense/Expense'
+import Navigation from './Components/Navigation/Navigation.jsx'
 import Login from './Components/Login/Login'
-import { useGlobalContext } from './context/globalContext'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import Income from './Components/Income/Income'
+import Dashboard from './Components/Dashboard/Dashboard'
 
 function App() {
-  const [active, setActive] = useState(1)
-
-  const global = useGlobalContext()
-  console.log(global)
-
-  const displayData = () => {
-    switch (active) {
-      case 1:
-        return <Dashboard />
-      case 2:
-        return <Dashboard />
-      case 3:
-        return <Income />
-      case 4:
-        return <Expense />
-      default:
-        return <Dashboard />
-    }
-  }
-
   const orbMemo = useMemo(() => {
     return <Orb />
   }, [])
@@ -40,9 +19,15 @@ function App() {
     <AppStyled bg={bg} className='App'>
       {orbMemo}
       <MainLayout>
-        <Login />
-        {/* <Navigation active={active} setActive={setActive} />
-        <main>{displayData()}</main> */}
+        <Router>
+          <Routes>
+            <Route element={<Navigation />}>
+              <Route path='/Incomes' element={<Income />} />
+              <Route path='/dashboard' element={<Dashboard />} />
+            </Route>
+            <Route path='/' element={<Login />} />
+          </Routes>
+        </Router>
       </MainLayout>
     </AppStyled>
   )
