@@ -13,21 +13,17 @@ export const GlobalProvider = ({ children }) => {
 
   // USER
   const login = async (login) => {
-    const response = await axios
-      .post(`${BASE_URL}login`, login)
-      .catch((err) => {
-        setError(err.response.data.message)
-        console.log(err.response.data.message)
-      })
+    await axios.post(`${BASE_URL}login`, login).catch((err) => {
+      setError(err.response.data.message)
+    })
+    // console.log(response.data)
   }
 
   //INCOMES
   const addIncome = async (income) => {
-    const response = await axios
-      .post(`${BASE_URL}addIncome`, income)
-      .catch((err) => {
-        setError(err.response.data.message)
-      })
+    await axios.post(`${BASE_URL}addIncome`, income).catch((err) => {
+      setError(err.response.data.message)
+    })
     getIncomes()
   }
 
@@ -39,7 +35,7 @@ export const GlobalProvider = ({ children }) => {
   }
 
   const deleteIncome = async (id) => {
-    const response = await axios.delete(`${BASE_URL}deleteIncome/${id}`, {
+    await axios.delete(`${BASE_URL}deleteIncome/${id}`, {
       data: { userId: userId },
     })
     getIncomes()
@@ -56,11 +52,9 @@ export const GlobalProvider = ({ children }) => {
 
   //EXPENSES
   const addExpense = async (income) => {
-    const response = await axios
-      .post(`${BASE_URL}addExpense`, income)
-      .catch((err) => {
-        setError(err.response.data.message)
-      })
+    await axios.post(`${BASE_URL}addExpense`, income).catch((err) => {
+      setError(err.response.data.message)
+    })
     getExpenses()
   }
 
@@ -71,7 +65,7 @@ export const GlobalProvider = ({ children }) => {
   }
 
   const deleteExpense = async (id) => {
-    const response = await axios.delete(`${BASE_URL}deleteExpense/${id}`, {
+    await axios.delete(`${BASE_URL}deleteExpense/${id}`, {
       data: { userId: userId },
     })
     getExpenses()

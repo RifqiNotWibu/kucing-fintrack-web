@@ -57,7 +57,6 @@ function IncomeItem({
       default:
         return ''
     }
-    const indicator = 'lightgreen'
   }
 
   const expenseCatIcon = () => {
@@ -81,7 +80,6 @@ function IncomeItem({
       default:
         return ''
     }
-    const indicator = 'red'
   }
 
   return (
