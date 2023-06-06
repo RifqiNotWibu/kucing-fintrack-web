@@ -5,7 +5,7 @@ import { loginBtn } from '../../utils/Icons'
 import { useGlobalContext } from '../../context/globalContext'
 
 function Login() {
-  const { login, error, setError } = useGlobalContext()
+  const { login, setError } = useGlobalContext()
   const [inputState, setInputState] = useState({
     email: '',
     pass: '',
