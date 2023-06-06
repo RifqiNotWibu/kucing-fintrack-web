@@ -1,10 +1,10 @@
-import React, { useState, useMemo } from 'react'
+import React, { useMemo } from 'react'
 import styled from 'styled-components'
 import { MainLayout } from './styles/Layouts'
 import bg from './img/bg.png'
 
 import Orb from './Components/Orb/orb.js'
-import Navigation from './Components/Navigation/Navigation.jsx'
+import Navigation from './Components/Navigation/Navigation.js'
 import Login from './Components/Login/Login'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Income from './Components/Income/Income'

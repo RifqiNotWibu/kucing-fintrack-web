@@ -7,7 +7,7 @@ import IncomeItem from '../IncomeItem/IncomeItem'
 import ExpenseForm from './ExpenseForm'
 
 function Expense() {
-  const { addExpense, expenses, getExpenses, deleteExpense, totalExpense } =
+  const { expenses, getExpenses, deleteExpense, totalExpense } =
     useGlobalContext()
 
   useEffect(() => {
