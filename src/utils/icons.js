@@ -30,3 +30,5 @@ export const medical = <i className='fa-solid fa-briefcase-medical'></i>
 export const tv = <i className='fa-solid fa-tv'></i>
 export const circle = <i className='fa-solid fa-circle-dot'></i>
 export const loginBtn = <i className='fa-solid fa-arrow-right'></i>
+export const emptyTrans = <i className='fa-solid fa-money-check-dollar'></i>
+export const paragraph = <i className='fa-regular fa-align-left'></i>
