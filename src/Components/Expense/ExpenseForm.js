@@ -8,7 +8,7 @@ import { useGlobalContext } from '../../context/globalContext'
 import { plus } from '../../utils/Icons'
 
 function ExpenseForm() {
-  const { addExpense, getExpenses, error, setError } = useGlobalContext()
+  const { addExpense, error, setError } = useGlobalContext()
   const [inputState, setInputState] = useState({
     title: '',
     amount: '',
@@ -80,7 +80,6 @@ function ExpenseForm() {
           <option value='' disabled>
             Select Option
           </option>
-          {/* 3:36 */}
           <option value='education'>Education</option>
           <option value='groceries'>Groceries</option>
           <option value='health'>Health</option>
@@ -158,7 +157,7 @@ const FormStyled = styled.form`
     button {
       box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.06);
       &:hover {
-        background: var(--color-green) !important;
+        background: #4fc22b !important;
       }
     }
   }

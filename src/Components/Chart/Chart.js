@@ -48,7 +48,7 @@ function Chart() {
           const { amount } = income
           return amount
         }),
-        backgroundColor: 'green',
+        backgroundColor: '#4fc22b',
         tension: 0.2,
       },
       {

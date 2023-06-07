@@ -15,38 +15,40 @@ function Expense() {
   }, [])
 
   return (
-    <ExpenseStyled>
-      <InnerLayout>
-        <h1>Expenses</h1>
-        <h2 className='total-expense'>
-          Total Expense: <span>Rp {totalExpense()}</span>
-        </h2>
-        <div className='expense-content'>
-          <div className='form-container'>
-            <ExpenseForm />
+    <main>
+      <ExpenseStyled>
+        <InnerLayout>
+          <h1>Expenses</h1>
+          <h2 className='total-expense'>
+            Total Expense: <span>Rp {totalExpense()}</span>
+          </h2>
+          <div className='expense-content'>
+            <div className='form-container'>
+              <ExpenseForm />
+            </div>
+            <div className='expenses'>
+              {expenses.map((income) => {
+                const { id, title, amount, date, category, description, type } =
+                  income
+                return (
+                  <IncomeItem
+                    key={id}
+                    id={id}
+                    title={title}
+                    description={description}
+                    amount={amount}
+                    date={date}
+                    type={type}
+                    category={category}
+                    deleteItem={deleteExpense}
+                  />
+                )
+              })}
+            </div>
           </div>
-          <div className='expenses'>
-            {expenses.map((income) => {
-              const { id, title, amount, date, category, description, type } =
-                income
-              return (
-                <IncomeItem
-                  key={id}
-                  id={id}
-                  title={title}
-                  description={description}
-                  amount={amount}
-                  date={date}
-                  type={type}
-                  category={category}
-                  deleteItem={deleteExpense}
-                />
-              )
-            })}
-          </div>
-        </div>
-      </InnerLayout>
-    </ExpenseStyled>
+        </InnerLayout>
+      </ExpenseStyled>
+    </main>
   )
 }
 
@@ -57,7 +59,8 @@ const ExpenseStyled = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #fcf6f9;
+    background: rgba(252, 246, 249, 0.8);
+    backdrop-filter: blur(4.5px);
     border: 2px solid #ffffff;
     box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.06);
     border-radius: 20px;

@@ -58,7 +58,8 @@ const IncomeStyled = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #fcf6f9;
+    background: rgba(252, 246, 249, 0.8);
+    backdrop-filter: blur(4.5px);
     border: 2px solid #ffffff;
     box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.06);
     border-radius: 20px;
@@ -69,7 +70,7 @@ const IncomeStyled = styled.div`
     span {
       font-size: 2.5rem;
       font-weight: 800;
-      color: lightgreen;
+      color: #4fc22b;
     }
   }
   .income-content {

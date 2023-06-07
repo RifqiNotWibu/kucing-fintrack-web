@@ -8,7 +8,7 @@ import { useGlobalContext } from '../../context/globalContext'
 import { plus } from '../../utils/Icons'
 
 function Form() {
-  const { addIncome, getIncomes, error, setError } = useGlobalContext()
+  const { addIncome, error, setError } = useGlobalContext()
   const [inputState, setInputState] = useState({
     title: '',
     amount: '',
@@ -45,7 +45,7 @@ function Form() {
           type='text'
           value={title}
           name={'title'}
-          placeholder='Salary Title'
+          placeholder='Income Title'
           onChange={handleInput('title')}
         />
       </div>
@@ -54,7 +54,7 @@ function Form() {
           value={amount}
           type='number'
           name={'amount'}
-          placeholder={'Salary Amount'}
+          placeholder={'Income Amount'}
           onChange={handleInput('amount')}
         />
       </div>
@@ -78,7 +78,7 @@ function Form() {
           onChange={handleInput('category')}
         >
           <option value='' disabled>
-            Select Option
+            Category
           </option>
           <option value='salary'>Salary</option>
           <option value='freelancing'>Freelancing</option>
@@ -94,7 +94,7 @@ function Form() {
         <textarea
           name='description'
           value={description}
-          placeholder='Add A Reference'
+          placeholder='Add a note ~'
           id='description'
           cols='30'
           rows='4'
@@ -157,7 +157,7 @@ const FormStyled = styled.form`
     button {
       box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.06);
       &:hover {
-        background: var(--color-green) !important;
+        background: #4fc22b !important;
       }
     }
   }
