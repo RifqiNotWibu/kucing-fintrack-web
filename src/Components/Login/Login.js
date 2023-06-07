@@ -79,9 +79,9 @@ const LoginStyled = styled.form`
   padding: 2rem 2rem;
   width: max-content;
   height: max-content;
-  background: rgba(252, 246, 249, 0.78);
-  border: 3px solid #ffffff;
+  background: rgba(252, 246, 249, 0.8);
   backdrop-filter: blur(4.5px);
+  border: 3px solid #ffffff;
   border-radius: 32px;
   display: flex;
   flex-direction: column;
@@ -118,7 +118,7 @@ const LoginStyled = styled.form`
     button {
       box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.06);
       &:hover {
-        background: #5adb72 !important;
+        background: #4fc22b !important;
       }
     }
   }
