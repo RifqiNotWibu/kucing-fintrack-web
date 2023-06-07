@@ -110,7 +110,7 @@ function IncomeItem({
               bg={'var(--primary-color'}
               color={'#fff'}
               iColor={'#fff'}
-              hColor={'var(--color-green)'}
+              hColor={'#4fc22b'}
               onClick={() => deleteItem(id)}
             />
           </div>
@@ -164,7 +164,7 @@ const IncomeItemStyled = styled.div`
         width: 0.8rem;
         height: 0.8rem;
         border-radius: 50%;
-        background: lightgreen;
+        background: light#4fc22b;
       }
     }
 
@@ -181,7 +181,7 @@ const IncomeItemStyled = styled.div`
           align-items: center;
           gap: 0.5rem;
           color: var(--primary-color);
-          opacity: 0.8;
+          ;
         }
       }
     }
