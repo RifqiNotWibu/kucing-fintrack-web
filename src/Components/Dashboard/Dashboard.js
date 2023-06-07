@@ -56,12 +56,12 @@ function Dashboard() {
                 <p>Rp {Math.max(...expenses.map((item) => item.amount))}</p>
               </div>
             </div>
-            <div className='balance'>
-              <div className='balance-box'>
-                <h2>
-                  Total Balance : <span> Rp {totalBalance()}</span>{' '}
-                </h2>
-              </div>
+          </div>
+          <div className='balance'>
+            <div className='balance-box'>
+              <h2 style={{ color: totalBalance() >= 0 ? '#4fc22b' : 'red' }}>
+                Total Balance: <span>Rp {totalBalance()}</span>
+              </h2>
             </div>
           </div>
         </InnerLayout>
@@ -99,16 +99,12 @@ const DashboardStyled = styled.div`
                   padding-top: 0.8rem;
                   padding-left: 1rem;
                   height: 100px;
-                  color: green;
                   h2{
-                    color: green;
-                    opacity: 0.8;
                   }
                   p{
                       font-size: 1.75rem;
                       font-weight: 700;
-                      color: green;
-                      opacity: 0.6;
+                      color: #4fc22b;
                   }
                 }
                 .expense{
@@ -120,15 +116,12 @@ const DashboardStyled = styled.div`
                     padding-top: 0.8rem;
                     padding-left: 1rem;
                     height: 100px;
-                    color: red;
                     h2{
-                      color: red;
                     }
                     p{
                         font-size: 1.75rem;
                         font-weight: 700;
                         color: red;
-                        opacity: 0.6;
                     }
                 }
             }
@@ -144,8 +137,7 @@ const DashboardStyled = styled.div`
             }
             .income-title{
                 font-size: 1.2rem;
-                color: green;
-                opacity: 0.8;
+                color: #4fc22b;
                 padding-left: 1rem;
                 padding-right: 1rem;
                 span{
@@ -171,7 +163,6 @@ const DashboardStyled = styled.div`
             .expense-title{
                 font-size: 1.2rem;
                 color: red;
-                opacity: 0.8;
                 padding-left: 1rem;
                 padding-right: 1rem;
                 span{
@@ -197,8 +188,8 @@ const DashboardStyled = styled.div`
         }
     }
     .balance {
-      display: flex;
-      grid-column: 1 / 6;
+      display: grid;
+      margin-top: 1.5rem;
       justify-content: center;
       background: rgba(252, 246, 249, 0.4);
       backdrop-filter: blur(4.5px);
@@ -209,18 +200,12 @@ const DashboardStyled = styled.div`
         display: flex;
         flex-direction: column;
         h2{
-          color: green;
-          opacity: 0.8;
+          color: #4fc22b;
+          ;
         }
         span{
           margin-left: 1rem;
         }
-      p{
-          font-size: 1.75rem;
-          font-weight: 700;
-          color: green;
-          opacity: 0.6;
-      }
       }
    }
 `
