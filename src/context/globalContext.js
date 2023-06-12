@@ -1,22 +1,38 @@
 import React, { useContext, useState } from 'react'
 import axios from 'axios'
-
+// import { useDispatch } from 'react-redux'
+// import { saveToken } from '../redux/actions'
 const BASE_URL = 'http://localhost:3000/'
 
 const GlobalContext = React.createContext()
 
 export const GlobalProvider = ({ children }) => {
+  // const dispatch = useDispatch()
   const [incomes, setIncomes] = useState([])
   const [expenses, setExpenses] = useState([])
-  const [error, setError] = useState(null)
   const [loginData] = useState([])
+  const [registerData] = useState([])
+  const [error, setError] = useState(null)
 
   // USER
-  const login = async (login) => {
-    await axios.post(`${BASE_URL}login`, login).catch((err) => {
+  const register = async (Register) => {
+    try {
+      await axios.post(`${BASE_URL}Register`, Register)
+    } catch (err) {
+      console.log('catch')
       setError(err.response.data.message)
-    })
-    // console.log(response.data)
+    }
+  }
+
+  const login = async (login) => {
+    try {
+      const response = await axios.post(`${BASE_URL}login`, login)
+      // const token = response.data.token
+
+      // dispatch(saveToken(token))
+    } catch (err) {
+      setError(err.response.data.message)
+    }
   }
 
   //INCOMES
@@ -30,8 +46,8 @@ export const GlobalProvider = ({ children }) => {
   const userId = 1 //userId
   const getIncomes = async () => {
     const response = await axios.get(`${BASE_URL}getIncome/${userId}`)
-    setIncomes(response.data)
     console.log(response.data)
+    setIncomes(response.data)
   }
 
   const deleteIncome = async (id) => {
@@ -48,6 +64,19 @@ export const GlobalProvider = ({ children }) => {
     })
 
     return totalIncome
+  }
+
+  const getIncomesByFilter = async (year, month) => {
+    try {
+      const response = await axios.get(
+        `${BASE_URL}transactions-income/1?year=${year}&month=${month}`
+      )
+      console.log(year, month)
+      // console.log(response.data)
+      setIncomes(response.data)
+    } catch (err) {
+      setError(err.response.data.message)
+    }
   }
 
   //EXPENSES
@@ -99,6 +128,7 @@ export const GlobalProvider = ({ children }) => {
       value={{
         addIncome,
         getIncomes,
+        getIncomesByFilter,
         deleteIncome,
         totalIncome,
         incomes,
@@ -109,6 +139,8 @@ export const GlobalProvider = ({ children }) => {
         expenses,
         login,
         loginData,
+        register,
+        registerData,
         totalBalance,
         transactionHistory,
         error,
