@@ -21,7 +21,7 @@ function ExpenseForm() {
 
   const handleInput = (name) => (e) => {
     const value = name === 'amount' ? parseInt(e.target.value) : e.target.value
-    setInputState({ ...inputState, [name]: value, userId: 1 })
+    setInputState({ ...inputState, [name]: value, userId: 1 }) //userId ambil dari JWT
     setError('')
   }
 
