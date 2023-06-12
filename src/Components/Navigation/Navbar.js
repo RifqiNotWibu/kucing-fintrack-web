@@ -43,7 +43,7 @@ function Navbar({ active, setActive }) {
 
 const NavStyled = styled.nav`
   padding: 2rem 1.5rem;
-  width: 374px;
+  width: 320px;
   height: 100%;
   background: rgba(252, 246, 249, 0.6);
   backdrop-filter: blur(4.5px);
