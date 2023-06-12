@@ -18,7 +18,6 @@ function Expense() {
     <main>
       <ExpenseStyled>
         <InnerLayout>
-          <h1>Expenses</h1>
           <h2 className='total-expense'>
             Total Expense: <span>Rp {totalExpense()}</span>
           </h2>
