@@ -34,7 +34,7 @@ function IncomeItem({
   deleteItem,
   type,
 }) {
-  console.log('type', type)
+  description = description.slice(0, 15)
 
   const categoryIcon = () => {
     switch (category) {
