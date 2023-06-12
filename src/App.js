@@ -10,7 +10,11 @@ import Navigation from './Components/Navigation/Navigation.js'
 import Dashboard from './Components/Dashboard/Dashboard'
 import Income from './Components/Income/Income'
 import Expense from './Components/Expense/Expense'
-import Signup from './Components/Signup/Signup'
+import Register from './Components/Register/Register'
+import ForgotPassword from './Components/ForgotPassword/ForgotPassword'
+import ForgotOtp from './Components/ForgotPassword/ForgotOtp'
+import NewPass from './Components/ForgotPassword/NewPass'
+import Transactions from './Components/Transactions/Transactions'
 
 function App() {
   const orbMemo = useMemo(() => {
@@ -24,9 +28,13 @@ function App() {
         <Router>
           <Routes>
             <Route path='/' element={<Login />} />
-            <Route path='/signup' element={<Signup />} />
+            <Route path='/Register' element={<Register />} />
+            <Route path='/forgot-password' element={<ForgotPassword />} />
+            <Route path='/forgot-password-otp' element={<ForgotOtp />} />
+            <Route path='/forgot-password-newpass' element={<NewPass />} />
             <Route element={<Navigation />}>
               <Route path='/dashboard' element={<Dashboard />} />
+              <Route path='/transactions' element={<Transactions />} />
               <Route path='/Incomes' element={<Income />} />
               <Route path='/Expenses' element={<Expense />} />
             </Route>
