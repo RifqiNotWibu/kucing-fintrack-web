@@ -17,7 +17,6 @@ function Income() {
     <main>
       <IncomeStyled>
         <InnerLayout>
-          <h1>Incomes</h1>
           <h2 className='total-income'>
             Total Income: <span>Rp {totalIncome()}</span>
           </h2>
