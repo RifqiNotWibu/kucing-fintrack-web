@@ -7,6 +7,7 @@ import { useEffect } from 'react'
 import IncomeItem from '../IncomeItem/IncomeItem'
 
 function Income() {
+  let recentIncomes
   const { incomes, getIncomes, deleteIncome, totalIncome } = useGlobalContext()
 
   useEffect(() => {
@@ -14,8 +15,11 @@ function Income() {
   }, [])
 
   const maxSlice = incomes.length
-  const recentIncomes = incomes.slice(maxSlice - 4, maxSlice)
-
+  if (maxSlice < 4) {
+    recentIncomes = incomes.slice(0, maxSlice)
+  } else if (maxSlice >= 4) {
+    recentIncomes = incomes.slice(maxSlice - 4, maxSlice)
+  }
   return (
     <main>
       <IncomeStyled>
