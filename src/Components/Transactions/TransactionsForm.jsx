@@ -4,7 +4,7 @@ import Button from '../Button/Button'
 
 function TransactionsForm({ getIncomesByFilter }) {
   const [year, setYear] = useState('2023')
-  const [month, setMonth] = useState('1')
+  const [month, setMonth] = useState('0')
 
   const handleFormSubmit = (e) => {
     e.preventDefault()
