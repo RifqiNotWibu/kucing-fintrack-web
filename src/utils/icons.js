@@ -33,3 +33,4 @@ export const circle = <i className='fa-solid fa-circle-dot'></i>
 export const loginBtn = <i className='fa-solid fa-arrow-right'></i>
 export const emptyTrans = <i className='fa-solid fa-money-check-dollar'></i>
 export const paragraph = <i className='fa-regular fa-align-left'></i>
+export const travelling = <i className='fa-solid fa-plane-departure'></i>
