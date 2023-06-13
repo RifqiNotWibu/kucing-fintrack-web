@@ -19,7 +19,7 @@ import {
   takeaway,
   trash,
   tv,
-  users,
+  transfer,
   yt,
 } from '../../utils/Icons'
 import Button from '../Button/Button'
@@ -45,11 +45,11 @@ function IncomeItem({
       case 'investments':
         return stocks
       case 'stocks':
-        return users
-      case 'bitcoin':
+        return stocks
+      case 'crypto':
         return bitcoin
       case 'bank':
-        return card
+        return transfer
       case 'youtube':
         return yt
       case 'other':
@@ -69,7 +69,7 @@ function IncomeItem({
         return medical
       case 'subscriptions':
         return tv
-      case 'takeaways':
+      case 'beverages':
         return takeaway
       case 'clothing':
         return clothing
