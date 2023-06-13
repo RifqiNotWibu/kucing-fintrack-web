@@ -13,6 +13,9 @@ function Income() {
     getIncomes()
   }, [])
 
+  const maxSlice = incomes.length
+  const recentIncomes = incomes.slice(maxSlice - 4, maxSlice)
+
   return (
     <main>
       <IncomeStyled>
@@ -25,7 +28,7 @@ function Income() {
               <Form />
             </div>
             <div className='incomes'>
-              {incomes.map((income) => {
+              {recentIncomes.reverse().map((income) => {
                 const { id, title, amount, date, category, description, type } =
                   income
                 return (
