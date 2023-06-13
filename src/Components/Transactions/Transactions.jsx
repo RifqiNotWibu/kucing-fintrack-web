@@ -6,11 +6,11 @@ import IncomeItem from '../IncomeItem/IncomeItem'
 import TransactionsForm from './TransactionsForm'
 
 function Transactions() {
-  const { incomes, getIncomes, getIncomesByFilter, deleteIncome, totalIncome } =
+  const { incomes, getIncomesByFilter, deleteIncome, totalIncome } =
     useGlobalContext()
 
   useEffect(() => {
-    getIncomesByFilter()
+    getIncomesByFilter(2023, 0)
   }, [])
 
   return (
