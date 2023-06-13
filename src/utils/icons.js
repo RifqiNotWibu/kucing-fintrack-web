@@ -7,7 +7,7 @@ export const logout = <i className='fa-solid fa-sign-out'></i>
 export const trend = <i className='fa-solid fa-money-bill-trend-up'></i>
 export const expenses = <i className='fa-solid fa-money-bill-transfer'></i>
 export const money = <i className='fa-solid fa-money-bill'></i>
-export const freelance = <i className='fa-solid fa-earth-americas'></i>
+export const freelance = <i className='fa-solid fa-briefcase'></i>
 export const stocks = <i className='fa-solid fa-arrow-trend-up'></i>
 export const bitcoin = <i className='fa-brands fa-bitcoin'></i>
 export const piggy = <i className='fa-solid fa-piggy-bank'></i>
@@ -18,6 +18,7 @@ export const rupiah = (
   <i className='fa-sharp fa-solid fa-rupiah-sign fa-2.5xs'></i>
 )
 export const calender = <i className='fa-solid fa-calendar'></i>
+export const transfer = <i className='fa-solid fa-comments-dollar'></i>
 export const comment = <i className='fa-solid fa-comment'></i>
 export const plus = <i className='fa-solid fa-plus'></i>
 export const trash = <i className='fa-solid fa-trash'></i>
