@@ -7,12 +7,20 @@ import IncomeItem from '../IncomeItem/IncomeItem'
 import ExpenseForm from './ExpenseForm'
 
 function Expense() {
+  let recentExpenses
   const { expenses, getExpenses, deleteExpense, totalExpense } =
     useGlobalContext()
 
   useEffect(() => {
     getExpenses()
   }, [])
+
+  const maxSlice = expenses.length
+  if (maxSlice < 4) {
+    recentExpenses = expenses.slice(0, maxSlice)
+  } else if (maxSlice >= 4) {
+    recentExpenses = expenses.slice(maxSlice - 4, maxSlice)
+  }
 
   return (
     <main>
@@ -26,7 +34,7 @@ function Expense() {
               <ExpenseForm />
             </div>
             <div className='expenses'>
-              {expenses.map((income) => {
+              {recentExpenses.reverse().map((income) => {
                 const { id, title, amount, date, category, description, type } =
                   income
                 return (
