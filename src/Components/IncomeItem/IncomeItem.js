@@ -21,6 +21,7 @@ import {
   tv,
   transfer,
   yt,
+  travelling,
 } from '../../utils/Icons'
 import Button from '../Button/Button'
 
@@ -74,7 +75,7 @@ function IncomeItem({
       case 'clothing':
         return clothing
       case 'travelling':
-        return freelance
+        return travelling
       case 'other':
         return circle
       default:
