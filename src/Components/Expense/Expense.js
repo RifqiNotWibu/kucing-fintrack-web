@@ -8,8 +8,7 @@ import ExpenseForm from './ExpenseForm'
 
 function Expense() {
   let recentExpenses
-  const { expenses, getExpenses, deleteExpense, totalExpense } =
-    useGlobalContext()
+  const { expenses, getExpenses, deleteExpense } = useGlobalContext()
 
   useEffect(() => {
     getExpenses()
@@ -26,8 +25,8 @@ function Expense() {
     <main>
       <ExpenseStyled>
         <InnerLayout>
-          <h2 className='total-expense'>
-            Total Expense: <span>Rp {totalExpense()}</span>
+          <h2 className='expense-title'>
+            Record your <span>Expenses</span>(˵ •̀ ᴗ - ˵ ) ✧
           </h2>
           <div className='expense-content'>
             <div className='form-container'>
@@ -47,6 +46,7 @@ function Expense() {
                     date={date}
                     type={type}
                     category={category}
+                    indicatorColor='var(--color-red                                              )'
                     deleteItem={deleteExpense}
                   />
                 )
@@ -62,7 +62,7 @@ function Expense() {
 const ExpenseStyled = styled.div`
   display: flex;
   overflow: auto;
-  .total-expense {
+  .expense-title {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -73,7 +73,9 @@ const ExpenseStyled = styled.div`
     border-radius: 20px;
     padding: 1rem;
     margin: 1rem 0;
-    font-size: 2rem;
+    margin-top: -0.5rem;
+    font-size: 2.5rem;
+    font-weight: 800;
     gap: 0.5rem;
     span {
       font-size: 2.5rem;

@@ -8,7 +8,7 @@ import IncomeItem from '../IncomeItem/IncomeItem'
 
 function Income() {
   let recentIncomes
-  const { incomes, getIncomes, deleteIncome, totalIncome } = useGlobalContext()
+  const { incomes, getIncomes, deleteIncome } = useGlobalContext()
 
   useEffect(() => {
     getIncomes()
@@ -24,8 +24,8 @@ function Income() {
     <main>
       <IncomeStyled>
         <InnerLayout>
-          <h2 className='total-income'>
-            Total Income: <span>Rp {totalIncome()}</span>
+          <h2 className='income-title'>
+            Record your <span>Incomes</span> (˵ •̀ ᴗ - ˵ ) ✧
           </h2>
           <div className='income-content'>
             <div className='form-container'>
@@ -45,6 +45,7 @@ function Income() {
                     date={date}
                     type={type}
                     category={category}
+                    indicatorColor='var(--color-green)'
                     deleteItem={deleteIncome}
                   />
                 )
@@ -60,7 +61,7 @@ function Income() {
 const IncomeStyled = styled.div`
   display: flex;
   overflow: auto;
-  .total-income {
+  .income-title {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -71,7 +72,9 @@ const IncomeStyled = styled.div`
     border-radius: 20px;
     padding: 1rem;
     margin: 1rem 0;
-    font-size: 2rem;
+    margin-top: -0.5rem;
+    font-size: 2.5rem;
+    font-weight: 800;
     gap: 0.5rem;
     span {
       font-size: 2.5rem;
