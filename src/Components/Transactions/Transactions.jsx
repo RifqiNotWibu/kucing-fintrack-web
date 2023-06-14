@@ -1,13 +1,13 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useStat } from 'react'
 import styled from 'styled-components'
 import { InnerLayout } from '../../styles/Layouts'
 import { useGlobalContext } from '../../context/globalContext'
-import IncomeItem from '../IncomeItem/IncomeItem'
 import TransactionsForm from './TransactionsForm'
+import { TransactionsExpenses } from './TransactionsExpense'
+import { TransactionsIncomes } from './TransactionsIncomes'
 
 function Transactions() {
-  const { incomes, getIncomesByFilter, deleteIncome, totalIncome } =
-    useGlobalContext()
+  const { getIncomesByFilter, totalIncome } = useGlobalContext()
 
   useEffect(() => {
     getIncomesByFilter(2023, 0)
@@ -18,31 +18,14 @@ function Transactions() {
       <TransactionsStyled>
         <InnerLayout>
           <h2 className='total-income'>
-            Total Income: <span>Rp {totalIncome()}</span>
+            Total Income : <span>Rp {totalIncome()}</span>
           </h2>
           <div className='income-content'>
             <div className='form-container'>
               <TransactionsForm getIncomesByFilter={getIncomesByFilter} />
             </div>
-            <div className='incomes'>
-              {incomes.map((income) => {
-                const { id, title, amount, date, category, description, type } =
-                  income
-                return (
-                  <IncomeItem
-                    key={id}
-                    id={id}
-                    title={title}
-                    description={description}
-                    amount={amount}
-                    date={date}
-                    type={type}
-                    category={category}
-                    deleteItem={deleteIncome}
-                  />
-                )
-              })}
-            </div>
+            {/* <TransactionsIncomes /> */}
+            <TransactionsExpenses />
           </div>
         </InnerLayout>
       </TransactionsStyled>
@@ -64,7 +47,9 @@ const TransactionsStyled = styled.div`
     border-radius: 20px;
     padding: 1rem;
     margin: 1rem 0;
-    font-size: 2rem;
+    margin-top: -0.5rem;
+    font-size: 2.5rem;
+    font-weight: 800;
     gap: 0.5rem;
     span {
       font-size: 2.5rem;
@@ -78,25 +63,11 @@ const TransactionsStyled = styled.div`
     .incomes {
       flex: 1;
     }
-  }
-  input,
-  textarea,
-  select {
-    font-family: inherit;
-    font-size: inherit;
-    outline: none;
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 5px;
-    border: 2px solid #fff;
-    background: transparent;
-    resize: none;
-    box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.06);
-    color: rgba(34, 34, 96, 0.9);
-    &::placeholder {
-      color: rgba(34, 34, 96, 0.4);
+    .expenses {
+      flex: 1;
     }
   }
+
   .input-control {
     input {
       width: 100%;
