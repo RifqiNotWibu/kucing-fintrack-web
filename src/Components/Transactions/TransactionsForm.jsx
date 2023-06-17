@@ -2,13 +2,13 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import Button from '../Button/Button'
 
-function TransactionsForm({ getIncomesByFilter }) {
+function TransactionsForm({ payload }) {
   const [year, setYear] = useState('2023')
   const [month, setMonth] = useState('0')
 
   const handleFormSubmit = (e) => {
     e.preventDefault()
-    getIncomesByFilter(year, month)
+    payload(year, month)
   }
 
   const handleYearChange = (e) => {

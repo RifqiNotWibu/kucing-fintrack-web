@@ -1,13 +1,14 @@
 import React, { useContext, useState } from 'react'
 import axios from 'axios'
-// import { useDispatch } from 'react-redux'
-// import { saveToken } from '../redux/actions'
+import { useDispatch } from 'react-redux'
+import { loginAction } from '../redux/reducers/authActions'
+
 const BASE_URL = 'http://localhost:3000/'
 
 const GlobalContext = React.createContext()
 
 export const GlobalProvider = ({ children }) => {
-  // const dispatch = useDispatch()
+  const dispatch = useDispatch()
   const [incomes, setIncomes] = useState([])
   const [expenses, setExpenses] = useState([])
   const [loginData] = useState([])
@@ -24,14 +25,11 @@ export const GlobalProvider = ({ children }) => {
     }
   }
 
-  const login = async (login) => {
+  const login = async (credentials) => {
     try {
-      const response = await axios.post(`${BASE_URL}login`, login)
-      // const token = response.data.token
-
-      // dispatch(saveToken(token))
+      dispatch(loginAction(credentials))
     } catch (err) {
-      setError(err.response.data.message)
+      console.log('error')
     }
   }
 
@@ -71,8 +69,8 @@ export const GlobalProvider = ({ children }) => {
       const response = await axios.get(
         `${BASE_URL}transactions-income/1?year=${year}&month=${month}`
       )
-      console.log(year, month)
-      // console.log(response.data)
+      // console.log(year, month)
+      console.log(response.data)
       setIncomes(response.data)
     } catch (err) {
       setError(err.response.data.message)
@@ -108,6 +106,18 @@ export const GlobalProvider = ({ children }) => {
 
     return totalExpense
   }
+  const getExpensesByFilter = async (year, month) => {
+    try {
+      const response = await axios.get(
+        `${BASE_URL}transactions-expense/1?year=${year}&month=${month}`
+      )
+      // console.log(year, month)
+      console.log(response.data)
+      setExpenses(response.data)
+    } catch (err) {
+      setError(err.response.data.message)
+    }
+  }
 
   const totalBalance = () => {
     return totalIncome() - totalExpense()
@@ -134,6 +144,7 @@ export const GlobalProvider = ({ children }) => {
         incomes,
         addExpense,
         getExpenses,
+        getExpensesByFilter,
         deleteExpense,
         totalExpense,
         expenses,

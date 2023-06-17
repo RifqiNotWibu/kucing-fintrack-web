@@ -32,11 +32,11 @@ function IncomeItem({
   date,
   category,
   description,
+  indicatorColor,
   deleteItem,
   type,
 }) {
   description = description.slice(0, 15)
-
   const categoryIcon = () => {
     switch (category) {
       case 'salary':
@@ -84,7 +84,7 @@ function IncomeItem({
   }
 
   return (
-    <IncomeItemStyled>
+    <IncomeItemStyled indicator={indicatorColor}>
       <div className='icon'>
         {type === 'expense' ? expenseCatIcon() : categoryIcon()}
       </div>
@@ -156,19 +156,18 @@ const IncomeItemStyled = styled.div`
       font-size: 1.3rem;
       padding-left: 2rem;
       position: relative;
-      &::before {
-        content: '';
-        position: absolute;
-        left: 0;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 0.8rem;
-        height: 0.8rem;
-        border-radius: 50%;
-        background: light#4fc22b;
-      }
+      &::before{ 
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 0.8rem;
+      height: 0.8rem;
+      border-radius: 50%;
+      background: ${(props) => props.indicator};
+  }
     }
-
     .inner-content {
       display: flex;
       justify-content: space-between;

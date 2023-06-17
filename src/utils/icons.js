@@ -23,12 +23,12 @@ export const comment = <i className='fa-solid fa-comment'></i>
 export const plus = <i className='fa-solid fa-plus'></i>
 export const trash = <i className='fa-solid fa-trash'></i>
 export const signout = <i className='fa-solid fa-right-from-bracket'></i>
-export const takeaway = <i className='fa-solid fa-utensils'></i>
+export const takeaway = <i className='fa-solid fa-burger'></i>
 export const clothing = <i className='fa-solid fa-shirt'></i>
 export const book = <i className='fa-solid fa-book-open'></i>
-export const food = <i className='fa-solid fa-bowl-food'></i>
+export const food = <i class='fa-solid fa-basket-shopping'></i>
 export const medical = <i className='fa-solid fa-briefcase-medical'></i>
-export const tv = <i className='fa-solid fa-tv'></i>
+export const tv = <i className='fa-solid fa-burger-lettuce'></i>
 export const circle = <i className='fa-solid fa-circle-dot'></i>
 export const loginBtn = <i className='fa-solid fa-arrow-right'></i>
 export const emptyTrans = <i className='fa-solid fa-money-check-dollar'></i>

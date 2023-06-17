@@ -2,14 +2,12 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import Button from '../Button/Button'
 import { loginBtn } from '../../utils/Icons'
-import { useSelector, useDispatch } from 'react-redux'
-import { login } from '../../redux/reducers/authActions'
+// import { useDispatch } from 'react-redux'
 import { useGlobalContext } from '../../context/globalContext'
 import { Link } from 'react-router-dom'
 
 function Login() {
-  const dispatch = useDispatch()
-  const error = useSelector((state) => state.auth.error)
+  // const dispatch = useDispatch()
   const { login, setError } = useGlobalContext()
   const [inputState, setInputState] = useState({
     email: '',
@@ -25,7 +23,8 @@ function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    dispatch(login(inputState))
+    // dispatch(login(inputState))
+    login(inputState)
     setInputState({
       email: '',
       pass: '',
