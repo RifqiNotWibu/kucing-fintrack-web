@@ -15,6 +15,7 @@ import ForgotPassword from './Components/ForgotPassword/ForgotPassword'
 import ForgotOtp from './Components/ForgotPassword/ForgotOtp'
 import NewPass from './Components/ForgotPassword/NewPass'
 import Transactions from './Components/Transactions/Transactions'
+import Unauthorized from './Components/401/unauthorized'
 
 function App() {
   const orbMemo = useMemo(() => {
@@ -32,6 +33,7 @@ function App() {
             <Route path='/forgot-password' element={<ForgotPassword />} />
             <Route path='/forgot-password-otp' element={<ForgotOtp />} />
             <Route path='/forgot-password-newpass' element={<NewPass />} />
+            <Route path='/unauthorized' element={<Unauthorized />} />
             <Route element={<Navigation />}>
               <Route path='/dashboard' element={<Dashboard />} />
               <Route path='/transactions' element={<Transactions />} />
