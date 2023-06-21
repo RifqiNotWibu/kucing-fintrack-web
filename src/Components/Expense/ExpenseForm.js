@@ -46,6 +46,7 @@ function ExpenseForm() {
           value={title}
           name={'title'}
           placeholder='Expense Title'
+          maxLength={30}
           onChange={handleInput('title')}
         />
       </div>
@@ -55,6 +56,7 @@ function ExpenseForm() {
           type='number'
           name={'amount'}
           placeholder={'Expense Amount'}
+          maxLength={11}
           onChange={handleInput('amount')}
         />
       </div>
@@ -98,6 +100,7 @@ function ExpenseForm() {
           id='description'
           cols='30'
           rows='4'
+          maxLength={25}
           onChange={handleInput('description')}
         ></textarea>
       </div>

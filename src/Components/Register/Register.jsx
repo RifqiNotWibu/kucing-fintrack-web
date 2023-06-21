@@ -40,17 +40,19 @@ function Register() {
         <input
           type='text'
           value={username}
-          name={'username'}
+          name='username'
           placeholder='username'
+          maxLength={15}
           onChange={handleInput('username')}
         />
       </div>
       <div className='input-control'>
         <input
           value={email}
-          type='text'
-          name={'email'}
-          placeholder={'email'}
+          type='email'
+          name='email'
+          placeholder='email'
+          maxLength={25}
           onChange={handleInput('email')}
         />
       </div>
@@ -58,8 +60,9 @@ function Register() {
         <input
           value={pass}
           type='password'
-          name={'password'}
-          placeholder={'password'}
+          name='password'
+          placeholder='password'
+          maxLength={15}
           onChange={handleInput('pass')}
         />
       </div>
@@ -75,7 +78,7 @@ function Register() {
           />
         </div>
         <div className='back-btn'>
-          <Link to='/'>
+          <Link to='./Regist_Success'>
             <Button
               name='Back'
               bg='transparent'
