@@ -3,18 +3,26 @@ import styled from 'styled-components'
 import avatar from '../../img/avatar.png'
 import { signout } from '../../utils/Icons'
 import { menuItems } from '../../utils/menuItems'
-import { Link } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { Link, useNavigate } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
+import { unAuthorize } from '../../redux/reducers/authActions'
 
 function Navbar({ active, setActive }) {
-  const user = useSelector((state) => state.user.user)
+  const username = useSelector((state) => state.user?.user?.username)
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  const handleLogout = () => {
+    dispatch(unAuthorize())
+    navigate('/')
+  }
 
   return (
     <NavStyled>
       <div className='user-con'>
         <img src={avatar} alt='' />
         <div className='text'>
-          <h2>{user?.username}</h2>
+          <h2>{username}</h2>
           <p>Kucing Finance</p>
         </div>
       </div>
@@ -38,7 +46,7 @@ function Navbar({ active, setActive }) {
         })}
       </ul>
       <div className='bottom-nav'>
-        <li>{signout} Sign Out</li>
+        <li onClick={handleLogout}>{signout} Logout</li>
       </div>
     </NavStyled>
   )
@@ -117,6 +125,13 @@ const NavStyled = styled.nav`
       text-decoration : none ;
     }
   }
+
+  .bottom-nav {
+    margin-left: 1rem;
+    li{
+      cursor: pointer;
+    }
+}
 `
 
 export default Navbar
