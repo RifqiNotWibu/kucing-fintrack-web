@@ -5,11 +5,15 @@ import { useGlobalContext } from '../../context/globalContext'
 import TransactionsForm from './TransactionsForm'
 import { TransactionsExpenses } from './TransactionsExpense'
 import { TransactionsIncomes } from './TransactionsIncomes'
+import { useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 function Transactions() {
   const { getIncomesByFilter, getExpensesByFilter, totalIncome, totalExpense } =
     useGlobalContext()
   const [activeComponent, setActiveComponent] = useState('incomes')
+  const navigate = useNavigate()
+  const authorized = useSelector((state) => state.authorized)
 
   const handleToggleChange = () => {
     setActiveComponent((prevComponent) =>
@@ -26,46 +30,55 @@ function Transactions() {
     getIncomesByFilter(2023, 0)
   }, [])
 
-  return (
-    <main>
-      <TransactionsStyled>
-        <InnerLayout>
-          {activeComponent === 'incomes' ? (
-            <h2 className='totals'>
-              Total Income : <span className='totinc'>Rp {totalIncome()}</span>
-            </h2>
-          ) : (
-            <h2 className='totals'>
-              Total Expense :{' '}
-              <span className='totexp'>Rp {totalExpense()}</span>
-            </h2>
-          )}
-          <div className='income-content'>
-            <div className='form-container'>
-              {activeComponent === 'incomes' ? (
-                <TransactionsForm payload={getIncomesByFilter} />
-              ) : (
-                <TransactionsForm payload={getExpensesByFilter} />
-              )}
-              <label className='switch-toggle'>
-                <input
-                  type='checkbox'
-                  checked={activeComponent === 'expenses'}
-                  onChange={handleToggleChange}
-                />
-                <span className='switch-slider round'></span>
-              </label>
-            </div>
+  useEffect(() => {
+    if (!authorized) {
+      navigate('/')
+    }
+  }, [authorized, navigate])
+
+  if (authorized) {
+    return (
+      <main>
+        <TransactionsStyled>
+          <InnerLayout>
             {activeComponent === 'incomes' ? (
-              <TransactionsIncomes />
+              <h2 className='totals'>
+                Total Income :{' '}
+                <span className='totinc'>Rp {totalIncome()}</span>
+              </h2>
             ) : (
-              <TransactionsExpenses />
+              <h2 className='totals'>
+                Total Expense :{' '}
+                <span className='totexp'>Rp {totalExpense()}</span>
+              </h2>
             )}
-          </div>
-        </InnerLayout>
-      </TransactionsStyled>
-    </main>
-  )
+            <div className='income-content'>
+              <div className='form-container'>
+                {activeComponent === 'incomes' ? (
+                  <TransactionsForm payload={getIncomesByFilter} />
+                ) : (
+                  <TransactionsForm payload={getExpensesByFilter} />
+                )}
+                <label className='switch-toggle'>
+                  <input
+                    type='checkbox'
+                    checked={activeComponent === 'expenses'}
+                    onChange={handleToggleChange}
+                  />
+                  <span className='switch-slider round'></span>
+                </label>
+              </div>
+              {activeComponent === 'incomes' ? (
+                <TransactionsIncomes />
+              ) : (
+                <TransactionsExpenses />
+              )}
+            </div>
+          </InnerLayout>
+        </TransactionsStyled>
+      </main>
+    )
+  }
 }
 const TransactionsStyled = styled.div`
   display: flex;
