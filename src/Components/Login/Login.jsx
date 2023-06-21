@@ -2,14 +2,11 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import Button from '../Button/Button'
 import { loginBtn } from '../../utils/Icons'
-import { useSelector, useDispatch } from 'react-redux'
-import { login } from '../../redux/reducers/authActions'
 import { useGlobalContext } from '../../context/globalContext'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 function Login() {
-  const dispatch = useDispatch()
-  const error = useSelector((state) => state.auth.error)
+  const navigate = useNavigate()
   const { login, setError } = useGlobalContext()
   const [inputState, setInputState] = useState({
     email: '',
@@ -25,11 +22,12 @@ function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    dispatch(login(inputState))
+    login(inputState)
     setInputState({
       email: '',
       pass: '',
     })
+    navigate('/dashboard')
   }
 
   return (
@@ -127,6 +125,9 @@ const LoginStyled = styled.form`
   }
   .submit-btn {
     flex: 1; 
+    a{
+      text-decoration: none;
+    }
     button {
       box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.06);
       &:hover {
