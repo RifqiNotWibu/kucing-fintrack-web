@@ -1,29 +1,29 @@
 const initialState = {
-  loggedIn: false,
+  authorized: false,
   user: null,
   error: null,
 }
 
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'LOGIN_SUCCESS':
+    case 'AUTHORIZED':
       return {
         ...state,
-        loggedIn: true,
+        authorized: true,
         user: action.payload,
         error: null,
       }
-    case 'LOGIN_FAILURE':
+    case 'UNAUTHORIZED':
       return {
         ...state,
-        loggedIn: false,
+        authorized: false,
         user: null,
         error: action.payload,
       }
     case 'LOGOUT':
       return {
         ...state,
-        loggedIn: false,
+        authorized: false,
         user: null,
         error: null,
       }
