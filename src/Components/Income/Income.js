@@ -5,10 +5,14 @@ import { useGlobalContext } from '../../context/globalContext'
 import Form from '../Form/Form'
 import { useEffect } from 'react'
 import IncomeItem from '../IncomeItem/IncomeItem'
+import { useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 function Income() {
   let recentIncomes
   const { incomes, getIncomes, deleteIncome } = useGlobalContext()
+  const navigate = useNavigate()
+  const authorized = useSelector((state) => state.authorized)
 
   useEffect(() => {
     getIncomes()
@@ -20,42 +24,58 @@ function Income() {
   } else if (maxSlice >= 4) {
     recentIncomes = incomes.slice(maxSlice - 4, maxSlice)
   }
-  return (
-    <main>
-      <IncomeStyled>
-        <InnerLayout>
-          <h2 className='income-title'>
-            Record your <span>Incomes</span> (˵ •̀ ᴗ - ˵ ) ✧
-          </h2>
-          <div className='income-content'>
-            <div className='form-container'>
-              <Form />
+
+  useEffect(() => {
+    if (!authorized) {
+      navigate('/')
+    }
+  }, [authorized, navigate])
+
+  if (authorized) {
+    return (
+      <main>
+        <IncomeStyled>
+          <InnerLayout>
+            <h2 className='income-title'>
+              Record your <span>Incomes</span> (˵ •̀ ᴗ - ˵ ) ✧
+            </h2>
+            <div className='income-content'>
+              <div className='form-container'>
+                <Form />
+              </div>
+              <div className='incomes'>
+                {recentIncomes.reverse().map((income) => {
+                  const {
+                    id,
+                    title,
+                    amount,
+                    date,
+                    category,
+                    description,
+                    type,
+                  } = income
+                  return (
+                    <IncomeItem
+                      key={id}
+                      id={id}
+                      title={title}
+                      description={description}
+                      amount={amount}
+                      date={date}
+                      type={type}
+                      category={category}
+                      indicatorColor='var(--color-green)'
+                      deleteItem={deleteIncome}
+                    />
+                  )
+                })}
+              </div>
             </div>
-            <div className='incomes'>
-              {recentIncomes.reverse().map((income) => {
-                const { id, title, amount, date, category, description, type } =
-                  income
-                return (
-                  <IncomeItem
-                    key={id}
-                    id={id}
-                    title={title}
-                    description={description}
-                    amount={amount}
-                    date={date}
-                    type={type}
-                    category={category}
-                    indicatorColor='var(--color-green)'
-                    deleteItem={deleteIncome}
-                  />
-                )
-              })}
-            </div>
-          </div>
-        </InnerLayout>
-      </IncomeStyled>
-    </main>
-  )
+          </InnerLayout>
+        </IncomeStyled>
+      </main>
+    )
+  }
 }
 
 const IncomeStyled = styled.div`
