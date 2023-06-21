@@ -3,7 +3,7 @@ import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
 import { authorize, unAuthorize } from '../redux/reducers/authActions'
 
-const BASE_URL = 'http://localhost:3000/api/v1/'
+const BASE_URL = 'https://kucingfintrack-api.up.railway.app/api/v1/'
 const GlobalContext = React.createContext()
 
 export const GlobalProvider = ({ children }) => {
@@ -42,7 +42,7 @@ export const GlobalProvider = ({ children }) => {
     try {
       const config = {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `${token}`,
         },
       }
       await axios.post(`${BASE_URL}addIncome`, income, config)
@@ -60,7 +60,7 @@ export const GlobalProvider = ({ children }) => {
     try {
       const config = {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `${token}`,
         },
       }
       const response = await axios.get(`${BASE_URL}getIncome/${userId}`, config)
@@ -79,7 +79,7 @@ export const GlobalProvider = ({ children }) => {
     try {
       const config = {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `${token}`,
         },
         data: { userId: userId },
       }
@@ -106,36 +106,109 @@ export const GlobalProvider = ({ children }) => {
 
   const getIncomesByFilter = async (year, month) => {
     try {
+      const config = {
+        headers: {
+          Authorization: `${token}`,
+        },
+      }
       const response = await axios.get(
-        `${BASE_URL}transactions-income/1?year=${year}&month=${month}`
+        `${BASE_URL}transactions-income/1?year=${year}&month=${month}`,
+        config
       )
-      // console.log(year, month)
-      console.log(response.data)
       setIncomes(response.data)
-    } catch (err) {
-      setError(err.response.data.message)
+    } catch (error) {
+      if (error.response.status === 401 || error.response.status === 403) {
+        dispatch(unAuthorize(error.message))
+      } else {
+        setError(error.response.data.message)
+        dispatch(unAuthorize(error.message))
+      }
     }
   }
 
   //EXPENSES
-  const addExpense = async (income) => {
-    await axios.post(`${BASE_URL}addExpense`, income).catch((err) => {
-      setError(err.response.data.message)
-    })
-    getExpenses()
+
+  const addExpense = async (expense) => {
+    try {
+      const config = {
+        headers: {
+          Authorization: `${token}`,
+        },
+      }
+      await axios.post(`${BASE_URL}addExpense`, expense, config)
+      getExpenses()
+    } catch (error) {
+      if (error.response.status === 401 || error.response.status === 403) {
+        dispatch(unAuthorize(error.message))
+      } else {
+        dispatch(unAuthorize(error.message))
+        setError(error.response.data.message)
+      }
+    }
   }
 
   const getExpenses = async () => {
-    const response = await axios.get(`${BASE_URL}getExpense/${userId}`)
-    setExpenses(response.data)
-    console.log(response.data)
+    try {
+      const config = {
+        headers: {
+          Authorization: `${token}`,
+        },
+      }
+      const response = await axios.get(
+        `${BASE_URL}getExpense/${userId}`,
+        config
+      )
+      setExpenses(response.data)
+    } catch (error) {
+      if (error.response.status === 401 || error.response.status === 403) {
+        dispatch(unAuthorize(error.message))
+      } else {
+        dispatch(unAuthorize(error.message))
+        setError(error.response.data.message)
+      }
+    }
   }
 
   const deleteExpense = async (id) => {
-    await axios.delete(`${BASE_URL}deleteExpense/${id}`, {
-      data: { userId: userId },
-    })
-    getExpenses()
+    try {
+      const config = {
+        headers: {
+          Authorization: `${token}`,
+        },
+        data: { userId: userId },
+      }
+      await axios.delete(`${BASE_URL}deleteExpense/${id}`, config)
+      getExpenses()
+    } catch (error) {
+      if (error.response.status === 401 || error.response.status === 403) {
+        dispatch(unAuthorize(error.message))
+      } else {
+        dispatch(unAuthorize(error.message))
+        setError(error.response.data.message)
+      }
+    }
+  }
+
+  const getExpensesByFilter = async (year, month) => {
+    try {
+      const config = {
+        headers: {
+          Authorization: `${token}`,
+        },
+      }
+      const response = await axios.get(
+        `${BASE_URL}transactions-expense/1?year=${year}&month=${month}`,
+        config
+      )
+      setExpenses(response.data)
+    } catch (error) {
+      if (error.response.status === 401 || error.response.status === 403) {
+        dispatch(unAuthorize(error.message))
+      } else {
+        dispatch(unAuthorize(error.message))
+        setError(error.response.data.message)
+      }
+    }
   }
 
   const totalExpense = () => {
@@ -145,17 +218,6 @@ export const GlobalProvider = ({ children }) => {
     })
 
     return totalExpense
-  }
-  const getExpensesByFilter = async (year, month) => {
-    try {
-      const response = await axios.get(
-        `${BASE_URL}transactions-expense/1?year=${year}&month=${month}`
-      )
-      console.log(response.data)
-      setExpenses(response.data)
-    } catch (err) {
-      setError(err.response.data.message)
-    }
   }
 
   const totalBalance = () => {
