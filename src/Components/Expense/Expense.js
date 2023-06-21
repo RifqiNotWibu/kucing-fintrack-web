@@ -7,6 +7,7 @@ import IncomeItem from '../IncomeItem/IncomeItem'
 import ExpenseForm from './ExpenseForm'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import { Helmet } from 'react-helmet'
 
 function Expense() {
   let recentExpenses
@@ -35,6 +36,9 @@ function Expense() {
     return (
       <main>
         <ExpenseStyled>
+          <Helmet>
+            <title>Kucing Fintracker | Expense</title>
+          </Helmet>
           <InnerLayout>
             <h2 className='expense-title'>
               Record your <span>Expenses</span>(˵ •̀ ᴗ - ˵ ) ✧

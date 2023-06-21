@@ -4,6 +4,7 @@ import Button from '../Button/Button'
 import { loginBtn } from '../../utils/Icons'
 import { useGlobalContext } from '../../context/globalContext'
 import { Link, useNavigate } from 'react-router-dom'
+import { Helmet } from 'react-helmet'
 
 function Login() {
   const navigate = useNavigate()
@@ -32,6 +33,9 @@ function Login() {
 
   return (
     <LoginStyled onSubmit={handleSubmit}>
+      <Helmet>
+        <title>Kucing Fintracker | Login</title>
+      </Helmet>
       <div className='title'>
         <h2>Welcome!</h2>
         <h5>Please login to continue ( •̀ᴗ•́ )و ̑̑</h5>

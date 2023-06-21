@@ -7,6 +7,7 @@ import { TransactionsExpenses } from './TransactionsExpense'
 import { TransactionsIncomes } from './TransactionsIncomes'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import { Helmet } from 'react-helmet'
 
 function Transactions() {
   const { getIncomesByFilter, getExpensesByFilter, totalIncome, totalExpense } =
@@ -40,6 +41,9 @@ function Transactions() {
     return (
       <main>
         <TransactionsStyled>
+          <Helmet>
+            <title>Kucing Fintracker | Transactions</title>
+          </Helmet>
           <InnerLayout>
             {activeComponent === 'incomes' ? (
               <h2 className='totals'>

@@ -6,6 +6,7 @@ import { InnerLayout } from '../../styles/Layouts'
 import Chart from '../Chart/Chart'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import { Helmet } from 'react-helmet'
 
 function Dashboard() {
   const navigate = useNavigate()
@@ -36,6 +37,9 @@ function Dashboard() {
     return (
       <main>
         <DashboardStyled>
+          <Helmet>
+            <title>Kucing Fintracker | Dashboard</title>
+          </Helmet>
           <InnerLayout>
             <div className='stats-con'>
               <div className='chart-con'>

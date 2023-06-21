@@ -7,6 +7,7 @@ import { useEffect } from 'react'
 import IncomeItem from '../IncomeItem/IncomeItem'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import { Helmet } from 'react-helmet'
 
 function Income() {
   let recentIncomes
@@ -35,6 +36,9 @@ function Income() {
     return (
       <main>
         <IncomeStyled>
+          <Helmet>
+            <title>Kucing Fintracker | Income</title>
+          </Helmet>
           <InnerLayout>
             <h2 className='income-title'>
               Record your <span>Incomes</span> (˵ •̀ ᴗ - ˵ ) ✧
