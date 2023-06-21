@@ -4,8 +4,13 @@ import { useGlobalContext } from '../../context/globalContext'
 import History from '../History/History'
 import { InnerLayout } from '../../styles/Layouts'
 import Chart from '../Chart/Chart'
+import { useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 function Dashboard() {
+  const navigate = useNavigate()
+  const authorized = useSelector((state) => state.authorized)
+
   const {
     totalExpense,
     incomes,
@@ -21,53 +26,61 @@ function Dashboard() {
     getExpenses()
   }, [])
 
-  return (
-    <main>
-      <DashboardStyled>
-        <InnerLayout>
-          <div className='stats-con'>
-            <div className='chart-con'>
-              <Chart />
-              <div className='amount-con'>
-                <div className='income'>
-                  <h2>Total Income</h2>
-                  <p>Rp {totalIncome()}</p>
+  useEffect(() => {
+    if (!authorized) {
+      navigate('/')
+    }
+  }, [authorized, navigate])
+
+  if (authorized) {
+    return (
+      <main>
+        <DashboardStyled>
+          <InnerLayout>
+            <div className='stats-con'>
+              <div className='chart-con'>
+                <Chart />
+                <div className='amount-con'>
+                  <div className='income'>
+                    <h2>Total Income</h2>
+                    <p>Rp {totalIncome()}</p>
+                  </div>
+                  <div className='expense'>
+                    <h2>Total Expense</h2>
+                    <p>Rp {totalExpense()}</p>
+                  </div>
                 </div>
-                <div className='expense'>
-                  <h2>Total Expense</h2>
-                  <p>Rp {totalExpense()}</p>
+              </div>
+              <div className='history-con'>
+                <History />
+                <h2 className='income-title'>
+                  Min<span>Income</span>Max
+                </h2>
+                <div className='income-item'>
+                  <p>Rp {Math.min(...incomes.map((item) => item.amount))}</p>
+                  <p>Rp {Math.max(...incomes.map((item) => item.amount))}</p>
+                </div>
+                <h2 className='expense-title'>
+                  Min<span>Expense</span>Max
+                </h2>
+                <div className='expense-item'>
+                  <p>Rp {Math.min(...expenses.map((item) => item.amount))}</p>
+                  <p>Rp {Math.max(...expenses.map((item) => item.amount))}</p>
                 </div>
               </div>
             </div>
-            <div className='history-con'>
-              <History />
-              <h2 className='income-title'>
-                Min<span>Income</span>Max
-              </h2>
-              <div className='income-item'>
-                <p>Rp {Math.min(...incomes.map((item) => item.amount))}</p>
-                <p>Rp {Math.max(...incomes.map((item) => item.amount))}</p>
-              </div>
-              <h2 className='expense-title'>
-                Min<span>Expense</span>Max
-              </h2>
-              <div className='expense-item'>
-                <p>Rp {Math.min(...expenses.map((item) => item.amount))}</p>
-                <p>Rp {Math.max(...expenses.map((item) => item.amount))}</p>
+            <div className='balance'>
+              <div className='balance-box'>
+                <h2 style={{ color: totalBalance() >= 0 ? '#4fc22b' : 'red' }}>
+                  Total Balance: <span>Rp {totalBalance()}</span>
+                </h2>
               </div>
             </div>
-          </div>
-          <div className='balance'>
-            <div className='balance-box'>
-              <h2 style={{ color: totalBalance() >= 0 ? '#4fc22b' : 'red' }}>
-                Total Balance: <span>Rp {totalBalance()}</span>
-              </h2>
-            </div>
-          </div>
-        </InnerLayout>
-      </DashboardStyled>
-    </main>
-  )
+          </InnerLayout>
+        </DashboardStyled>
+      </main>
+    )
+  }
 }
 
 const DashboardStyled = styled.div`
