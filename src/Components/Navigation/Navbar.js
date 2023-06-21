@@ -4,15 +4,18 @@ import avatar from '../../img/avatar.png'
 import { signout } from '../../utils/Icons'
 import { menuItems } from '../../utils/menuItems'
 import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 function Navbar({ active, setActive }) {
+  const user = useSelector((state) => state.user.user)
+
   return (
     <NavStyled>
       <div className='user-con'>
         <img src={avatar} alt='' />
         <div className='text'>
-          <h2>Rifqi</h2>
-          <p>Your Money</p>
+          <h2>{user?.username}</h2>
+          <p>Kucing Finance</p>
         </div>
       </div>
       <ul className='menu-items'>
