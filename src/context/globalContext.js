@@ -1,10 +1,9 @@
 import React, { useContext, useState } from 'react'
 import axios from 'axios'
-import { useDispatch } from 'react-redux'
-import { loginAction } from '../redux/reducers/authActions'
+import { useDispatch, useSelector } from 'react-redux'
+import { authorize, unAuthorize } from '../redux/reducers/authActions'
 
-const BASE_URL = 'http://localhost:3000/'
-
+const BASE_URL = 'http://localhost:3000/api/v1/'
 const GlobalContext = React.createContext()
 
 export const GlobalProvider = ({ children }) => {
@@ -15,44 +14,85 @@ export const GlobalProvider = ({ children }) => {
   const [registerData] = useState([])
   const [error, setError] = useState(null)
 
+  const userId = useSelector((state) => state.user?.user?.id) || 0
+  const token = useSelector((state) => state.user?.token)
+
   // USER
   const register = async (Register) => {
     try {
-      await axios.post(`${BASE_URL}Register`, Register)
+      await axios.post(`${BASE_URL}register`, Register)
     } catch (err) {
-      console.log('catch')
       setError(err.response.data.message)
     }
   }
 
   const login = async (credentials) => {
     try {
-      dispatch(loginAction(credentials))
-    } catch (err) {
-      console.log('error')
+      const response = await axios.post(`${BASE_URL}login`, credentials)
+      const { user, token } = response.data
+
+      dispatch(authorize(user, token))
+    } catch (error) {
+      dispatch(unAuthorize(error.message))
     }
   }
 
   //INCOMES
   const addIncome = async (income) => {
-    await axios.post(`${BASE_URL}addIncome`, income).catch((err) => {
-      setError(err.response.data.message)
-    })
-    getIncomes()
+    try {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+      await axios.post(`${BASE_URL}addIncome`, income, config)
+      getIncomes()
+    } catch (error) {
+      if (error.response.status === 401 || error.response.status === 403) {
+      } else {
+        setError(error.response.data.message)
+        dispatch(unAuthorize(error.message))
+      }
+    }
   }
 
-  const userId = 1 //userId
   const getIncomes = async () => {
-    const response = await axios.get(`${BASE_URL}getIncome/${userId}`)
-    console.log(response.data)
-    setIncomes(response.data)
+    try {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+      const response = await axios.get(`${BASE_URL}getIncome/${userId}`, config)
+      setIncomes(response.data)
+    } catch (error) {
+      if (error.response.status === 401 || error.response.status === 403) {
+        dispatch(unAuthorize(error.message))
+      } else {
+        setError(error.response.data.message)
+        dispatch(unAuthorize(error.message))
+      }
+    }
   }
 
   const deleteIncome = async (id) => {
-    await axios.delete(`${BASE_URL}deleteIncome/${id}`, {
-      data: { userId: userId },
-    })
-    getIncomes()
+    try {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        data: { userId: userId },
+      }
+      await axios.delete(`${BASE_URL}deleteIncome/${id}`, config)
+      getIncomes()
+    } catch (error) {
+      if (error.response.status === 401 || error.response.status === 403) {
+        dispatch(unAuthorize(error.message))
+      } else {
+        setError(error.response.data.message)
+        dispatch(unAuthorize(error.message))
+      }
+    }
   }
 
   const totalIncome = () => {
@@ -111,7 +151,6 @@ export const GlobalProvider = ({ children }) => {
       const response = await axios.get(
         `${BASE_URL}transactions-expense/1?year=${year}&month=${month}`
       )
-      // console.log(year, month)
       console.log(response.data)
       setExpenses(response.data)
     } catch (err) {
