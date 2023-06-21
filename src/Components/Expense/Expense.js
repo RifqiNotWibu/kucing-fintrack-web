@@ -5,10 +5,14 @@ import { useGlobalContext } from '../../context/globalContext'
 import { useEffect } from 'react'
 import IncomeItem from '../IncomeItem/IncomeItem'
 import ExpenseForm from './ExpenseForm'
+import { useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 function Expense() {
   let recentExpenses
   const { expenses, getExpenses, deleteExpense } = useGlobalContext()
+  const navigate = useNavigate()
+  const authorized = useSelector((state) => state.authorized)
 
   useEffect(() => {
     getExpenses()
@@ -21,44 +25,58 @@ function Expense() {
     recentExpenses = expenses.slice(maxSlice - 4, maxSlice)
   }
 
-  return (
-    <main>
-      <ExpenseStyled>
-        <InnerLayout>
-          <h2 className='expense-title'>
-            Record your <span>Expenses</span>(˵ •̀ ᴗ - ˵ ) ✧
-          </h2>
-          <div className='expense-content'>
-            <div className='form-container'>
-              <ExpenseForm />
-            </div>
-            <div className='expenses'>
-              {recentExpenses.reverse().map((income) => {
-                const { id, title, amount, date, category, description, type } =
-                  income
-                return (
-                  <IncomeItem
-                    key={id}
-                    id={id}
-                    title={title}
-                    description={description}
-                    amount={amount}
-                    date={date}
-                    type={type}
-                    category={category}
-                    indicatorColor='var(--color-red                                              )'
-                    deleteItem={deleteExpense}
-                  />
-                )
-              })}
-            </div>
-          </div>
-        </InnerLayout>
-      </ExpenseStyled>
-    </main>
-  )
-}
+  useEffect(() => {
+    if (!authorized) {
+      navigate('/')
+    }
+  }, [authorized, navigate])
 
+  if (authorized) {
+    return (
+      <main>
+        <ExpenseStyled>
+          <InnerLayout>
+            <h2 className='expense-title'>
+              Record your <span>Expenses</span>(˵ •̀ ᴗ - ˵ ) ✧
+            </h2>
+            <div className='expense-content'>
+              <div className='form-container'>
+                <ExpenseForm />
+              </div>
+              <div className='expenses'>
+                {recentExpenses.reverse().map((income) => {
+                  const {
+                    id,
+                    title,
+                    amount,
+                    date,
+                    category,
+                    description,
+                    type,
+                  } = income
+                  return (
+                    <IncomeItem
+                      key={id}
+                      id={id}
+                      title={title}
+                      description={description}
+                      amount={amount}
+                      date={date}
+                      type={type}
+                      category={category}
+                      indicatorColor='var(--color-red                                              )'
+                      deleteItem={deleteExpense}
+                    />
+                  )
+                })}
+              </div>
+            </div>
+          </InnerLayout>
+        </ExpenseStyled>
+      </main>
+    )
+  }
+}
 const ExpenseStyled = styled.div`
   display: flex;
   overflow: auto;
