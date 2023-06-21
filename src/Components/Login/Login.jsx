@@ -20,9 +20,9 @@ function Login() {
     setError('')
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    login(inputState)
+    await login(inputState)
     setInputState({
       email: '',
       pass: '',
